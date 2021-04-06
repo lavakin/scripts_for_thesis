@@ -155,31 +155,31 @@ class Walk:
     def all_paths_from_v(G,v,k):
         paths = 0
         for i in range(len(G)):
-            paths += all_simple_paths(G, v, i, cutoff=k) - all_simple_paths(G, v, i, cutoff=k-1) 
+            paths += len(list(nx.all_simple_paths(G, v, i, cutoff=k))) - len(list(nx.all_simple_paths(G, v, i, cutoff=k-1))) 
         return paths
     
     
     # Path-walk ratio 1; proposed by Randić
     def path_walk_ratio1(G,k):
-        walks =  matrix_power(nx.to_numpy_matrix(G), k).sum(axis=1)
-        paths = [all_paths_from_v(G,v) for v in range(len(G))]
-        return sum(paths[i]/walks[i[0]] for i in range(len(G)))
+        walks =  np.array(matrix_power(nx.to_numpy_matrix(G), k).sum(axis=1))
+        paths = [Walk.all_paths_from_v(G,v,k) for v in range(len(G))]
+        return sum([paths[i]/walks.item(i,0) for i in range(len(G))])
     
 
     # Path-walk ratio 2
     def path_walk_ratio2(G,k):
         walks = matrix_power(nx.to_numpy_matrix(G), k).sum()
-        paths = sum(all_paths_from_v(G,v) for v in range(len(G)))
+        paths = sum(Walk.all_paths_from_v(G,v,k) for v in range(len(G)))
         return paths/walks 
     
     
     def number_of_paths_k(G,k):
-        return sum(all_paths_from_v(G,v) for v in range(len(G)))
+        return sum(Walk.all_paths_from_v(G,v,k) for v in range(len(G)))
     
     
     # Estrada index proposed by estrada
     def estrada(G,k):
-        return matrix_power(nx.to_numpy_matrix(G), k).trace()
+        return matrix_power(nx.to_numpy_matrix(G), k).trace().item(0)
         
         
     # Index based on the markov matrix (Klein et al.)
@@ -223,9 +223,13 @@ class Matching:
     # Hosoya index (not the most effective implementation)
     def hosoya(G):
         #connected component with the most edges
+        if Matching.is_computable(G):
+            return Matching.compute_matching(G)
         K = max([G.subgraph(c).copy() for c in nx.connected_components(G)],key=lambda x: len(x.edges()))
         #edge of a central vertex
         e = list(G.edges(nx.center(K)[0]))[0]
+        
+        #e = random.choice(list(G.edges))
         G_one_edge = Matching.remove_edge(G,e)
         G_edges = Matching.remove_edges(G,e)
         m1 = Matching.compute_matching(G_one_edge) if Matching.is_computable(G_one_edge) else Matching.hosoya(G_one_edge)

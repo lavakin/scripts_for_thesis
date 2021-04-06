@@ -6,6 +6,10 @@ def power_law(x,a,b):
     return a*np.power(x, b)
 
 
+def modified_power_law(x,a,b,c):
+    return a*np.power(x, b) + c*np.power(x, 2)
+
+
 def exponential(x,a,b,c):
     return a*np.exp(b*x) + c
 
@@ -21,9 +25,14 @@ def linear(x,a,b):
 def poly2(x,a,b,c):
 	return a * x + b * x**2 + c
 
+def poly3(x,a,b,c,d):
+	return a * x + b * x**2 + c * x**3 + d
+
+def poly4(x,a,b,c,d,e):
+	return a * x + b * x**2 + c * x**3 + d * x**4 + e
 
 def logarithm(x,a,b):
-    return a*math.log(x) + b
+    return a*np.log(x) + b
 
 
 def plateau(x,a,b):
