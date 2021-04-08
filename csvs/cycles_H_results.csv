@@ -1,0 +1,20 @@
+index,function name,RMSE
+wiener,logarithm,50.954
+sum_connectivity,logarithm,46.006
+randic,logarithm,47.924
+balaban,logarithm,59.429
+szeged,logarithm,43.03
+revised szeged,logarithm,44.264
+detour,logarithm,40.367
+harary,logarithm,56.274
+path_walk_ratio 1.1,logarithm,59.418
+path_walk_ratio 1.2,logarithm,61.407
+path_walk_ratio 2.1,polynomial 2,87.249
+path_walk_ratio 2.2,polynomial 2,88.977
+estrada 2,logarithm,50.144
+estrada 4,logarithm,60.217
+markov 2,logarithm,46.364
+markov 4,logarithm,51.088
+wiener_hosoya,logarithm,52.064
+line estrada 2,modified_power,37.224
+line estrada 4,modified_power,40.058

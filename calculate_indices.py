@@ -180,6 +180,11 @@ class Walk:
     # Estrada index proposed by estrada
     def estrada(G,k):
         return matrix_power(nx.to_numpy_matrix(G), k).trace().item(0)
+    
+    
+    def line_estrada(G,k):
+        L = nx.line_graph(G)
+        return Walk.markov(L,k)
         
         
     # Index based on the markov matrix (Klein et al.)

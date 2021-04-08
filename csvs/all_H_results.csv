@@ -1,0 +1,20 @@
+index,function name,RMSE
+wiener,modified_power,45.003
+sum_connectivity,modified_power,41.152
+randic,modified_power,43.239
+balaban,modified_power,58.343
+szeged,modified_power,35.16
+revised szeged,modified_power,34.971
+detour,modified_power,31.116
+harary,modified_power,48.537
+path_walk_ratio 1.1,modified_power,49.553
+path_walk_ratio 1.2,modified_power,47.754
+path_walk_ratio 2.1,polynomial 2,85.134
+path_walk_ratio 2.2,polynomial 2,72.327
+estrada 2,modified_power,43.236
+estrada 4,modified_power,48.038
+markov 2,power,43.326
+markov 4,power,50.138
+wiener_hosoya,modified_power,59.867
+line estrada 2,modified_power,37.512
+line estrada 4,modified_power,42.746
